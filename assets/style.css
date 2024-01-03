@@ -1,0 +1,53 @@
+body {
+     margin: 0;
+     padding: 0;
+     display: flex;
+     justify-content: center;
+     height: 98vh;
+     align-items: center;
+}
+
+#butOne {
+     border-radius: 15px;
+     font-size: 1.5rem;
+}
+#butOne:hover {
+     background-color: beige;
+}
+
+#butTwo {
+     border-radius: 15px;
+     font-size: 1.5rem;
+}
+#butTwo:hover {
+     background-color: beige;
+}
+
+
+ button {
+     width: 150px;
+     height: 150px;
+     font-weight: bold;
+     font-size: 50px;
+     margin: 5px;
+     float:left;
+     background-color:burlywood;
+   }
+
+   #game {
+     background-color: rgba(0, 0, 0, 0.615);
+     margin: 0 auto;
+     padding: 10px;
+   }
+   
+   #game div {
+     margin: 0 auto;
+     overflow: hidden;
+   }
+   .hidden {
+     display: none;
+   }
+
+   .morpion {
+     display: none;
+   }
