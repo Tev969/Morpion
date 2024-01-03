@@ -1,12 +1,12 @@
 let playerOneTurn = true;
 let playAgainstIa = false;
 let enemy = "";
+// const restartGame = document.querySelector(".restarts");
 const players = document.querySelector(".players");
 const cells = document.querySelectorAll("#game button");
 const playerVsIa = document.querySelector("#butTwo");
 const playerVsPlayer = document.querySelector("#butOne");
 let count = 0;
-
 playerVsPlayer.addEventListener("click", () => {
   enemy = "Joueur 2";
   showGrid();
@@ -27,13 +27,6 @@ function showGrid() {
   players.textContent = `Joueur vs ${enemy}`;
 }
 
-// function showIaGrid() {
-//   document.querySelector("#game").classList.remove("hidden");
-//   document.querySelector("#gameChoice").classList.add("hidden");
-//   players.classList.remove("morpion");
-//   players.textContent = "Joueur vs IA";
-// }
-
 const winCondition = [
   [0, 1, 2],
   [3, 4, 5],
@@ -52,11 +45,10 @@ function changeSymbol(game) {
     element.addEventListener(
       "click",
       () => {
-          count ++
-          console.log(count);
-          if (count >= 9) {
-               players.textContent = "Egalité"
-          }
+        count++;
+        if (count >= 9) {
+          players.textContent = "Egalité";
+        }
         game(element);
       },
       { once: true }
@@ -71,7 +63,8 @@ function play(element) {
   optionCase[index] = element.textContent;
   winnerCondition();
   if (count >= 9) {
-     players.textContent = "Egalité !"
+    players.textContent = "Egalité !";
+    document.querySelector("#game").classList.add("hidden");
   }
   playerOneTurn = !playerOneTurn;
   if (playAgainstIa) {
@@ -84,14 +77,17 @@ function playWithIa(el) {
     let cells = document.querySelectorAll(".index");
     let cpuChoice = randomize(0, cells.length - 1);
     while (cells[cpuChoice].textContent != "") {
-     console.log('test');
-     cpuChoice = randomize(0, cells.length - 1);
-     if (count >= 9) {
-          players.textContent = "égalité"
-          return
-     }
+      cpuChoice = randomize(0, cells.length - 1);
+      if (count >= 9) {
+        players.textContent = "égalité";
+        document.querySelector("#game").classList.add("hidden");
+
+        resetGame();
+
+        return;
+      }
     }
-    cells[cpuChoice].click()
+    cells[cpuChoice].click();
     winnerCondition();
   }
 }
@@ -108,6 +104,8 @@ function winnerCondition() {
         cellA === "X" ? "Joueur 1 a Gagner !!!" : `${enemy} a Gagner !!!`;
       winningRound = true;
       document.querySelector("#game").classList.add("hidden");
+
+      resetGame();
 
       break;
     }
